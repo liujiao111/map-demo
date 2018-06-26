@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+        梅花街道demo
+    </title>
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js">
+    </script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=pzr7GbFeIFPTurTj2g3fT4aM6t54IYyn">
+    </script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js">
+    </script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+
+    <style type="text/css">
+        html { height: 100%; } body { height: 100%; margin: 0px; padding: 0px; }
+        #container { height: 100%; }
+        #controls { width:30%; position:absolute; left:0px; top:0px;z-index:100; }
+        p{margin-left:5px; font-size:14px;}
+    </style>
+    <link rel="stylesheet" type="text/css"  href="css/timetool.css">
+</head>
+<body>
+<div id="controls">
+    <!--<input type="button" onclick="getBoundary()" value="获取路网">-->
+    <input id="road" type="checkbox" value="路况" name="checkbox" onclick="roadHeat()" checked/><font color="red">路况</font>
+    <input id="heat" type="checkbox" value="热力" name="checkbox" onclick="roadHeat()"/><font color="red">热力</font>
+</div>
+<div id="container">
+</div>
+<div class="mb_time_box">
+
+</div>
+<!--<p id="test">时间:<span id="time"></span></p>-->
+<script type="text/javascript" src="demo.js"></script>
+<script type="text/javascript" src="flow_chart_data.js"></script>
+<script type="text/javascript" src="road_data_v1.js"></script>
+<script type="text/javascript" src="road_data_v2.js"></script>
+
+<script type="text/javascript" src="kpTimeTool.js"></script>
+<script type="text/javascript" >
+
+    var result=this.initTimeToolDate("20180311");
+    console.log(result);
+    kpTimeTool.init(result,test);
+
+    function test(HH){
+        time=HH;
+
+        setTimeout(roadHeat,500);
+    };
+   /* if(document.addEventListener){
+        document.addEventListener('DOMMouseScroll',roadHeat,false);
+    }//W3C
+    window.onmousewheel=document.onmousewheel=roadHeat;  //IE/Opera/Chrome*/
+   
+   
+   var scrollFunc=function(e){
+   		//alert(map.getZoom())
+    /* e=e || window.event;
+     var t1=document.getElementById("mapInfo");
+         t1.value=map.getZoom();
+         alert(t1.value)*/
+ }
+ /*注册事件*/
+	 if(document.addEventListener){
+	     document.addEventListener('DOMMouseScroll',scrollFunc,false);
+	 }//W3C
+	 window.onmousewheel=document.onmousewheel=roadHeat;//IE/Opera/Chrome
+
+</script>
+</body>
