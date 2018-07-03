@@ -1,0 +1,59 @@
+﻿/**
+ * @api {POST GET} /describe 描述
+ * @apiName describe
+ * @apiVersion 0.1.0
+ * @apiDescription 创建热力图实例
+ * @apiGroup HeatmapOverlay
+ */
+ /**
+     * @api {POST GET} /construction 构造器
+     * @apiName construction
+     * @apiVersion 0.1.0
+     * @apiGroup HeatmapOverlay
+     * @apiExample 调用示例
+ //构造示例
+    var map =new KingMap.Map({id:"allmap",apiType:"BMap",lng:116.418261,lat:39.921984,zoom:15}).getMap();
+    var points =[
+    	{"lng":116.418261,"lat":39.921984,"count":50},
+    	{"lng":116.423332,"lat":39.916532,"count":51},
+    	{"lng":116.425867,"lat":39.918989,"count":8}
+	];
+    
+    var dataSet ={
+    	max:12,
+    	data:points
+    }
+    
+    var heatmap= new KingMap.HeatmapOverlay(map,dataSet);
+    * @apiParam {Object} map 必须，地图对象
+    * @apiParam {Array} dataSet 必须,数据对象数组，数据对象如：{lng:116.39,lat:23.12,count:12},其中lng（经度）、lat（纬度）属性必须，count（权重）属性可缺省
+
+    * @apiParam {Object} options 可选,覆盖物渲染的参数定义对象
+	* @apiParam {String} [options.radius]	可选，热力图的半径，默认：30，单位：pixel
+	* @apiParam {Number} [options.visible]	可选，热力图是否显示（仅百度）,1为显示热力图
+	* @apiParam {Object} [options.gradient]	可选，热力图的渐变区间，热力图按照设置的颜色及间隔显示热力图
+	* @apiParam {Number} [options.opacity]	可选，热力的透明度（仅百度），取值范围[0,1]，0表示完全透明，1表示不透明，默认：[0,1]
+	* @apiParam {Array} [options.opacity]	可选，支持的缩放级别范围（仅高德）,，取值范围[3-18]，默认：[3,18]
+     */
+    
+    
+
+    /**
+     * @api {POST GET} /function 方法
+     * @apiName function
+     * @apiVersion 0.1.0
+     * @apiDescription 可使用的方法
+     * @apiGroup HeatmapOverlay
+     * @apiExample 示例
+     heatmap.addDataPoint(new KingMap.Point(116.42076,39.915251),70);
+     * @apiParam {Point,Number} addDataPoint	添加热力图的详细坐标点
+参数1：KingMap.Point对象；参数2：可选，热力图权值，如12。
+     * @apiParam {Array} setDataSet	 设置热力图展现的详细数据, 实现之后,即可以立刻展现
+参数：热力详细数据，必须。例：
+[{"lng":116.191031,"lat":39.988585,"count":10}...],其中lng为经度，lat为纬度，count为权值（可选）
+     * @apiParam {none} hide	隐藏热力图
+     * @apiParam {none} show	显示热力图
+     * @apiParam {none} getOverlay	返回原生热力图层对象
+     * @apiParam {none} getOptions 获取初始化时的配置参数
+     * @apiParam {none} getApiType 获取地图覆盖物类型，高德地图类型："AMap"；百度地图类型："BMap"
+     */

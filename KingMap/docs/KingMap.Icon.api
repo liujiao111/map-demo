@@ -1,0 +1,46 @@
+/**
+ * @api {POST GET} /describe 描述
+ * @apiGroup Icon
+ * @apiName describe
+ * @apiVersion 0.1.0
+ * @apiDescription 基础坐标构造方法，实现对百度地图和高德地图Icon对象的封装
+ * @apiExample {js} 示例
+ * //构造示例
+ * var KingIcon = new KingMap.Icon({...});
+ * //方法调用
+ * KingIcon.getImageSize();
+ */
+
+    /**
+     * @api {POST GET} /construction 构造器
+     * @apiGroup Icon
+     * @apiName construction
+     * @apiVersion 0.1.0
+     * @apiExample 调用示例
+     * var KingIcon = new KingMap.Icon(options);
+* @apiParam {Object} options	Icon初始化参数
+* @apiParam {Array} [options.size]	可选，显示区域的大小，仅限百度。默认值：[500,500]
+* @apiParam {String} options.url	必须，图标的地址
+* @apiParam {Array} [options.imageOffset]	可选，图标偏移值，默认值：[20,20]
+* @apiParam {Array} [options.imageSize]	可选，图标大小，仅限高德，默认值：[36,36]
+* @apiParam {String} options.apiType	必须，坐标的类型，例：
+百度坐标类型："BMap"；高德坐标类型："AMap"；
+     */
+     /**
+     * @api {POST GET} /function 方法
+     * @apiGroup Icon
+     * @apiName function
+     * @apiVersion 0.1.0
+     * @apiDescription Icon图标使用的方法
+     * @apiExample 示例
+     * //设置标注所用的图标对象
+     * KingIcon.setImageSize([36,36]);
+     * @apiParam {Array} setImageSize 设置图标的大小，参数为数值型数组，例：[36,36]
+     * @apiParam {none} getIcon 返回原生的百度和高德Icon对象
+     * @apiParam {none} getApiType 返回原生point的类型，百度坐标类型："BMap"；高德坐标类型："AMap"
+     * @apiParam {none} getOptions 返回Icon类的基础配置参数options
+     */
+
+    
+
+

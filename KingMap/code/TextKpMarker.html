@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+            <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=V6Q4MQiGd9iXs9W4fngE9X68vLodU2UO"></script> 
+    		<script src="http://webapi.amap.com/maps?v=1.3"></script>			
+            <script type="text/javascript" src="js/KpBaseMap.js" ></script>
+            <script type="text/javascript" src="js/KpMarker.js"></script>
+            <script type="text/javascript" src="js/KpLabel.js"></script>
+            <script type="text/javascript" src="js/KpPoint.js"></script>
+            <script type="text/javascript" src="js/KpIcon.js"></script>
+            <script type="text/javascript" src="js/KpInfoWindow.js"></script>
+            <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
+    		<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <style type="text/css">
+        .amap-marker .marker-route {
+            position: absolute;
+            width: 40px;
+            height: 44px;
+            color: #e90000;
+            background: url(http://webapi.amap.com/theme/v1.3/images/newpc/poi-1.png) no-repeat;
+            cursor: pointer;
+        }
+        .amap-marker .marker-marker-bus-from {
+            background-position: -334px -180px;
+        }
+        body, html{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family:"微软雅黑";
+        }
+        #container{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family:"微软雅黑";
+        }
+        #r-result{
+            width: 100%;
+            padding-top: 620px;
+        }
+        .right-query {
+            float: right;
+            position: absolute;
+            top: 10px;
+            right: 117px;
+        }
+    </style>
+	</head>
+	<body>
+		<div id="container"></div>
+        <div class="right-query">
+            <button onclick="changeMapType();">切换地图</button>
+            <button onclick="setAngles()">标记物倾斜</button>
+        </div>
+	</body>
+	<script>
+		var kpmap = new KingMap.Map({id:"container",apiType:"AMap",zoom:15});
+        changeMapType();
+        function textEvent(MapsEvent){
+            console.log('这是开始');
+            console.log(MapsEvent.type)
+            console.log(MapsEvent.target)
+            console.log(MapsEvent.point.getPoint(kpmap.getMap().apiType))
+            console.log(MapsEvent.pixel)
+            console.log('这是结束');
+            // var Point = kpMarker.getPosition();
+            // // console.log('这是测试Point：'+Point.getLng()+':'+Point.getLat());
+            // var kpInfoWindow = new KingMap.InfoWindow({
+            //     apiType : kpmap.getMap().apiType,
+            //     width : 0,
+            //     height : 0,
+            //     position : kpMarker.getPosition()
+            // });
+            // kpInfoWindow.open(kpmap,kpMarker.getPosition());
+            // console.log('这是事件测试');
+            // console.log(type);
+        }
+        function changeMapType(){
+            // if($('#container')){
+            //     $('#container').remove();
+            //     var div = $('<div>');
+            //     div.prop('id','container');
+            //     $('body').append(div);
+            // }
+            if(kpmap.getMap().apiType=='BMap'){
+                kpmap = new KingMap.Map({id:"container",apiType:"AMap",zoom:15});
+                kpMarker = drawMarker();
+                // kpMarker.setAngle(45);   //设置偏转角度
+                // console.log(kpMarker.getPosition().getLng()+':'+kpMarker.getPosition().getLat());    //获取坐标
+                // console.log(kpMarker.getTitle());    //获取标题
+                kpMarker.setAnimation('jump'); //添加跳动动画
+                kpMarker.setLabel("我是一个小栗子",[20,20]);//label的例子
+                var icon = kpMarker.setIcon(new KingMap.Icon({
+                    apiType : 'AMap',
+                }));
+                var icon = kpMarker.getIcon();
+                kpMarker.setPosition(new KingMap.Point(113.33,23.12))
+                var kpInfoWindow = new KingMap.InfoWindow({
+                    apiType : 'AMap',
+                    width : 0,
+                    height : 0,
+                    position : kpMarker.getPosition()
+                });
+                kpInfoWindow.open(kpmap,kpMarker.getPosition());
+                console.log(kpMarker.getPosition().getPoint('AMap').lat);
+                kpMarker.addEventListener('dragend',textEvent);
+                return;
+            }else{
+                kpmap = new KingMap.Map({id:"container",apiType:"BMap",zoom:15});
+                kpMarker = drawMarker();
+                // kpMarker.setAngle(45);   //设置偏转角度
+                // console.log(kpMarker.getTitle());
+                kpMarker.setAnimation('jump'); //添加跳动动画
+                kpMarker.addEventListener('dragend',textEvent);
+                kpMarker.setLabel("我是一个小栗子",[20,20]);//label的例子
+                kpMarker.setIcon(new KingMap.Icon({
+                    imageSize : [36,36],
+                    apiType : 'BMap'
+                }));
+                kpMarker.setAngle(45);   //设置偏转角度
+                console.log('这是一个label测试'+kpMarker.getLabel().getContent());
+                var icon = kpMarker.getIcon();
+                console.log(icon)
+                kpMarker.setShadow(icon)
+                console.log('这是icon')
+                console.log(kpMarker.getShadow())
+                kpMarker.setShadow(kpMarker.getShadow());
+                // console.log(kpMarker.getIcon().getApiType());
+                var kpInfoWindow = new KingMap.InfoWindow({
+                    apiType : 'BMap',
+                    width : 0,
+                    height : 0,
+                    position : kpMarker.getPosition()
+                });
+                kpInfoWindow.open(kpmap,kpMarker.getPosition());
+                console.log(kpInfoWindow.getPosition());
+                // console.log(kpMarker.getPosition().getPoint('BMap'));
+                return;
+            }
+        }
+        function drawMarker(){
+            return kpMarker = new KingMap.Marker(kpmap,{lng:113.330914,lat:23.128659,rotation:0,title:'这是一个栗子'});
+        }
+		function setAngles(){
+            // if(kpMarker.getAngle()==45){
+            //     kpMarker.setAngle(0);
+            // }else{
+            //     kpMarker.setAngle(45);
+            // }
+            kpMarker.setAngle(Math.random()*360);
+        }
+	</script>
+</html>

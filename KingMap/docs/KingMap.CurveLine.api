@@ -1,0 +1,107 @@
+/**
+* @api {none} /describe 描述
+* @apiName describe
+* @apiGroup CurveLine
+* @apiVersion 0.1.0
+* @apiDescription 基于高德和百度地图的弧线覆盖物的KingMap.CurveLine对象
+*/
+
+/**
+* @api {POST GET} /construction 构造器
+* @apiName construction
+* @apiGroup CurveLine
+* @apiVersion 0.1.0
+* @apiExample 调用示例
+	var bmapOptions = {
+		id: "allmap",
+		apiType: "BMap",
+		zoom: 15,
+		lng: '113.551694',
+		lat: '22.365569'
+	};
+
+	var map = new KingMap.Map(bmapOptions).getMap();
+	var path = [ 
+		[116.39, 39.91, 116.37, 39.91], //起点
+		//第一段弧线
+		[116.380298, 39.907771, 116.38, 39.90]
+	]
+
+	var options = {
+		path: path,
+		apiType: "AMap",
+		isOpenEdit : true// 开启编辑功能
+	}
+	//构造实例
+	var curveLine = new KingMap.CurveLine(map, options);
+	
+* @apiParam {Object} map 必须,经过封装的KingMap对象
+
+* @apiParam {Object} options 覆盖物渲染的参数定义对象：
+* @apiParam {String} options.apiType	必须，地图类型
+百度地图类型："BMap"；高德地图类型："AMap"；
+* @apiParam {String} options.path	必须，折线路径坐标，由于高德和百度需要的数据格式
+差距较大，因此需要参考各自的API定义该字段。详情参见高德
+地图的BezierCurve类和百度地图第三方开源项目BMapLib.CurveLine类
+地址：http://huiyan-fe.github.io/BMap-JavaScript-library/#
+BMapLib.CurveLine
+* @apiParam {String} [options.strokeColor]	可选，线颜色，默认值#FF33FF
+* @apiParam {Number} [options.strokeOpacity]	可选，线透明度，默认值1
+* @apiParam {Number} [options.strokeWeight]	可选，线宽，默认值 3
+* @apiParam {String} [options.strokeStyle]	可选，线样式，默认值solid
+* @apiParam {Boolean} [options.isOpenEdit]	可选，是否开启编辑，默认false
+*/
+
+/**
+* @api {POST GET} /event 事件
+* @apiGroup CurveLine
+* @apiName event
+* @apiVersion 0.1.0
+* @apiDescription CurveLine覆盖物的触发事件。
+参数MapsEvent参考MapsEvent对象规范说明部分，none表示此事件没有参数
+* @apiExample 调用示例
+var Function = function(MapsEvent){
+    console.log(MapsEvent.target);
+    console.log(MapsEvent.point);
+    ....
+}
+curveLine.addEventListener('dblclick',Function);
+* @apiParam {MapsEvent} click 点击弧线标记图标后会触发此事件
+* @apiParam {MapsEvent} dblclick 双击弧线标记图标后会触发此事件
+* @apiParam {MapsEvent} mousedown 鼠标在弧线标记上按下时触发事件
+* @apiParam {MapsEvent} mouseup 鼠标在弧线标记上按下后抬起时触发事件
+* @apiParam {MapsEvent} mouseover 鼠标移近弧线标记时触发事件
+* @apiParam {MapsEvent} mouseout 鼠标离开弧线标记时触发此事件
+*/	
+
+/**
+	* @api {POST GET} /function 方法
+	* @apiName function
+	* @apiGroup CurveLine
+	* @apiVersion 0.1.0
+	* @apiDescription 可使用的方法
+	* @apiExample 示例
+	var curveLine = new KingMap.CurveLine(map, options);
+	var path = curveLine.getPath();
+
+	* @apiParam {none} getPath 获取弧线路径，返回路径数组，详情参考高德地图和百度地图具体类
+	
+	* @apiParam {none} hide 弧线隐藏
+	
+	* @apiParam {none} show  弧线显示
+	
+	* @apiParam {none} remove  弧线移除
+	
+	* @apiParam {none} getMap  获取弧线所在的地图对象，返回原生地图对象
+	
+	* @apiParam {none} getBounds  获取弧线的地理区域范围，返回KingMap.Bounds对象
+	* @apiParam {String,Function} addEventListener 覆盖物事件绑定，参数1：事件名；参数2：事件回调函数
+	
+	* @apiParam {String,Function} removeEventListener 覆盖物事件绑定移除，参数1：事件名；参数2：事件回调函数
+		
+	* @apiParam {none} getOverlay  获取原生对象，返回原生弧线对象
+
+	* @apiParam {none} getOptions 获取初始化时的配置参数
+    * @apiParam {none} getApiType 获取地图覆盖物类型，高德地图类型："AMap"；百度地图类型："BMap"
+	*/
+	

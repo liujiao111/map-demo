@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TestKpLabel</title>
+    <script src="http://api.map.baidu.com/api?v=3.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script src="http://webapi.amap.com/maps?v=1.4.7&key=1e387d3db027b46a23600cf7f2ed7344"></script>
+    <script type="text/javascript" src="js/KpBaseMap.js" ></script>
+    <script type="application/javascript" src="js/KpLabel-0.2.0.js?v=11"></script>
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    
+    <style type="text/css">
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        #allmap {
+            height: 90%;
+        }
+    </style>
+</head>
+<body>
+<div><button type="button" onclick="mapType('BMap')">百度</button><button type="button" onclick="mapType('AMap')">高德</button></div>
+<div><button type="button" onclick="init()">纯文本标记</button></div>
+<div><button type="button" onclick="deleteLabel()">删除标记</button></div>
+<div><button type="button" onclick="setClink()">增加点击事件</button></div>
+<div id="allmap"></div>
+<script type="application/javascript">
+    var map;
+    var kpLabel;
+    function mapType(ty) {
+        map = new KingMap.Map({id:"allmap",apiType:ty,zoom:7});
+    };
+    function init() {
+        kpLabel = new KingMap.Label(map,{text:'假装自己是一个文本'});
+    }
+    function deleteLabel() {
+        kpLabel.delete();
+    }
+    function setClink() {
+        var type="click";
+        var handler=clinkTest;
+        kpLabel.addEventListener(type,handler);
+    }
+    function clinkTest(e) {
+        console.log(e)
+        alert("你点击了ID为"+e.target.id+"的标注")
+    }
+</script>
+</body>
+<script type="application/javascript">
+    var testLabel =
+        {
+            option:{
+                position: [109.175995, 23.017055],    // 指定文本标注所在的地理位置
+                text: "这是一个简单的文本标注哦~",
+                offsets:[-10,-0]	//点标记显示位置偏移量
+            },
+            style: {
+                color: "red",
+                fontSize: "12px",
+                height: "20px",
+                lineHeight: "20px",
+                fontFamily: "微软雅黑"
+            }
+        };
+</script>
+</html>

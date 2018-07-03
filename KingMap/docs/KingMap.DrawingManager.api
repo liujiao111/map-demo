@@ -1,0 +1,71 @@
+
+
+
+
+/**
+* @api {POST GET} /describe 描述
+* @apiName describe
+* @apiGroup DrawingManager
+* @apiVersion 0.1.0
+* @apiDescription DrawingManager类，地图绘制工具, 基于地图api 封装的简单圈定工具（暂支持百度地图与高德地图）<br>
+				 通过该工具，可进行鼠标画折线、多边形、矩形、圆等功能
+
+*
+*/
+/**
+* @api {POST GET} /construction 构造器 
+* @apiName construction
+* @apiVersion 0.1.0
+* @apiGroup DrawingManager
+* @apiExample 调用示例
+ //实例化一个工具类
+ var drawingManager = new KingMap.DrawingManager(map);
+ 
+
+* @apiParam {object} map  必须,经过封装的KingMap对象
+
+*/
+
+/**
+* @api {POST GET} /event 事件
+* @apiName event
+* @apiVersion 0.1.0
+* @apiGroup DrawingManager
+* @apiDescription 初始时可配置的事件列表
+* @apiExample 示例
+*var options = {
+*   overlayComplete : callback 
+*}
+
+
+* @apiParam {overlay} overlayComplete	圈定绘制完成触发事件,参数为地图原生的overlay
+*/
+
+/**
+* @api {POST GET} /function 方法
+* @apiName function
+* @apiVersion 0.1.0
+* @apiGroup DrawingManager
+* @apiDescription 基于原生地图封装后暴露出来的方法
+* @apiExample 示例
+var callback = function  (overlay){
+	console.log("回调函数")
+	alert("这里是回调函数:" + (overlay ||' == ')  );
+};
+var drawingManager = new KingMap.DrawingManager(map);
+var overlay = drawingManager.draw(type,{
+	overlayComplete : callback,//回调函数实例
+	enableCopyMenu : true,//百度地图，开启右键复制 
+	enableRemoveMenu : true,//百度地图，开启右键删除
+	style : {fillColor : 'red'}//绘制的样式，不传默认样式
+});
+ 
+* @apiParam {Object} draw	开启绘制功能，参数如下：
+* @apiParam {String} draw.type 必须，绘制类型：'polygon','circle','polyline','rectangle'等；
+* @apiParam {Function} [draw.overlayComplete]	可选，回调函数实例;
+* @apiParam {Boolean} [draw.enableCopyMenu]	可选，百度地图，开启右键复制 ;
+* @apiParam {Boolean} [draw.enableRemoveMenu]	可选，百度地图，开启右键删除;
+* @apiParam {Object} [draw.style] 可选，绘制的样式，不传默认样式；
+	
+* 
+*/

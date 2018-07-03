@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<title>添加弧线</title>
+		<script src="http://webapi.amap.com/maps?v=1.4.6&key=Fbfd53015b31face22d005829a3b4756&plugin=AMap.BezierCurveEditor"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5KAySGU5Lr6CPvIZxzZA4MfjYu7rmhr6"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js"></script>
+		<script type="text/javascript" src="js/kpBaseMap.js"></script>
+		<script type="text/javascript" src="js/KpCurveLine.js"></script>
+		<script type="text/javascript" src="js/KpBounds.js"></script>
+		<script type="text/javascript" src="js/KpPoint.js"></script>
+		<style type="text/css">
+			body,
+			html,
+			#allmap {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				margin: 0;
+				font-family: "微软雅黑";
+			}
+			
+			.right-query {
+				float: right;
+				position: absolute;
+				top: 10px;
+				right: 117px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="allmap"></div>
+		<div class="right-query">
+			<button onclick="drawing.switch();">切换地图</button>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	var flag = 'AMap';
+	var amapOptions = {
+		id: "allmap",
+		apiType: "AMap",
+		zoom: 14,
+		lng: '116.39',
+		lat: '39.91'
+	};
+	var bmapOptions = {
+		id: "allmap",
+		apiType: "BMap",
+		zoom: 15,
+		lng: '116.39',
+		lat: '39.91'
+	};
+
+	var map = new KingMap.Map(amapOptions);
+	
+	drawCurveLineOnAMap(map);
+	
+	drawing = {
+		switch: function() {
+			document.getElementById("allmap").innerHTML = '';
+			if(flag == 'BMap') {
+				map = new KingMap.Map(amapOptions);
+				flag = 'AMap';
+				drawCurveLineOnAMap(map);
+			} else {
+				map = new KingMap.Map(bmapOptions);
+				flag = 'BMap';
+				drawCurveLineOnBMap(map);
+			}
+		}
+
+	}
+
+	function drawCurveLineOnAMap(map) {
+		var path = [ //每个弧线段有两种描述方式
+			[116.39, 39.91, 116.37, 39.91], //起点
+			//第一段弧线
+			[116.380298, 39.907771, 116.38, 39.90], //控制点，途经点
+			//第二段弧线
+			[116.385298, 39.907771, 116.40, 39.90], //控制点，途经点//弧线段有两种描述方式1
+			//第三段弧线
+			[ //弧线段有两种描述方式2
+				[116.392872, 39.887391], //控制点
+				[116.40772, 39.909252], //控制点
+				[116.41, 39.89] //途经点
+			],
+			//第四段弧线
+			[116.423857, 39.889498, 116.422312, 39.899639, 116.425273, 39.902273]
+			//控制点，控制点，途经点，每段最多两个控制点
+		]
+
+		var options = {
+			path: path,
+			apiType: "AMap",
+			isOpenEdit : true// 开启编辑功能
+		}
+
+		var curveLine = new KingMap.CurveLine(map, options);
+		var path = curveLine.getPath();
+		
+		console.log(curveLine.getBounds());
+		console.log(curveLine.getBounds().getSouthWest().getPoint(flag))
+		curveLine.addEventListener('click', function(){
+			curveLine.remove();
+			//curveLine.hide();
+			//alert(JSON.stringify(curveLine.getPath()));
+			/**
+			 * 返回格式：
+			 * [{"P":39.91,"O":116.37,"lng":116.37,"lat":39.91,"controlPoints":[{"P":39.91,"O":116.38999999999999,"lng":116.39,"lat":39.91}]},{"P":39.9,"O":116.38,"lng":116.38,"lat":39.9,"controlPoints":[{"P":39.907771,"O":116.38029799999998,"lng":116.380298,"lat":39.907771}]},
+			  {"P":39.9,"O":116.39999999999998,"lng":116.4,"lat":39.9,"controlPoints":[{"P":39.907771,"O":116.38529800000003,"lng":116.385298,"lat":39.907771}]},{"P":39.89,"O":116.40999999999997,"lng":116.41,"lat":39.89,"controlPoints":[{"P":39.887391,"O":116.39287200000001,"lng":116.392872,"lat":39.887391},{"P":39.909252,"O":116.40771999999998,"lng":116.40772,"lat":39.909252}]},{"P":39.902273,"O":116.425273,"lng":116.425273,"lat":39.902273,"controlPoints":[{"P":39.889498,"O":116.423857,"lng":116.423857,"lat":39.889498},{"P":39.899639,"O":116.42231200000003,"lng":116.422312,"lat":39.899639}]}]
+			 */	
+		});
+	}
+	
+	
+	function drawCurveLineOnBMap(map) {
+		var path = "116.380298, 39.907771; 116.38, 39.90; 116.423857, 39.889498; 116.422312, 39.899639"
+		var options = {
+			apiType: "BMap",
+			path : path,
+			isOpenEdit : true// 开启编辑功能
+		}
+		var curveLine = new KingMap.CurveLine(map, options);
+		console.log(curveLine.getBounds().getSouthWest().getPoint(flag));
+		console.log(curveLine.getBounds().getCenter().getPoint(flag));
+		curveLine.addEventListener('click', function(){
+			//alert(JSON.stringify(curveLine.getPath()))
+			//curveLine.hide();
+			console.log(curveLine.getBounds());
+			curveLine.remove();
+			/**
+			 * 返回格式：
+			 * [{"lng":116.380298,"lat":39.907771},{"lng":116.38043708130199,"lat":39.90755414455445},{"lng":116.38056588573262,"lat":39.907334380289065},{"lng":116.3806844132918,"lat":39.90711170720384},{"lng":116.38079266397962,"lat":39.906886125298755},
+			  {"lng":116.38089063779603,"lat":39.906657634573826},{"lng":116.380978334741,"lat":39.90642623502904},{"lng":116.38105575481458,"lat":39.90619192666442}]
+			 */
+		});
+		
+		
+	}
+</script>

@@ -1,0 +1,11 @@
+/**
+ * @api {POST GET} /describe 描述
+ * @apiGroup MapsEvent
+ * @apiName describe
+ * @apiVersion 0.1.0
+ * @apiDescription 此对象用于表示地图、覆盖物、叠加层上的各种鼠标事件返回，包含以下字段：
+ * @apiParam {String} type 	事件类型，如click。
+ * @apiParam {Object} target 发生事件的目标对象，百度或高德的原生对象。
+ * @apiParam {Point} point 发生事件时光标所在处的经纬度坐标，KingMap.Point类
+ * @apiParam {Array} pixel 发生事件时光标所在处的像素坐标，数组[666,666]
+ */

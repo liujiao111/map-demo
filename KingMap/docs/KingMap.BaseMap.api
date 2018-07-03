@@ -1,0 +1,104 @@
+/**
+ * @api {POST GET} /describe 描述
+ * @apiGroup Map
+ * @apiName describe
+ * @apiVersion 0.1.0
+ * @apiDescription 基础地图构造方法，实现对百度地图和高德地图相关方法的封装
+ * @apiExample {js} 示例
+ * //构造示例
+ * var KingMap = new KingMap.Map({...});
+ * //方法调用
+ * KingMap.getMap();
+ */
+/**
+* @api {POST GET} /construction 构造器
+* @apiGroup Map
+* @apiName construction
+* @apiVersion 0.1.0
+* @apiExample 调用示例
+* var KingMap = new KingMap.Map({
+*     id : 'allmap',
+*     apiType : 'BMap',
+*     lng : 113.330914,
+*     lan : 23.128659
+* });
+* @apiParam {Object} options   地图初始化参数定义对象：
+* @apiParam {String} options.id	必须，容器div id
+* @apiParam {String} [options.apiType]	可选，api类型，百度地图类型："BMap"；高德地图类型："AMap" ,默认'BMap'
+* @apiParam {Number} [options.lng]	可选，中心点经度，例：113.330914
+* @apiParam {Number} [options.lat]	可选，中心点纬度，例：23.128659
+* @apiParam {Array} [options.zooms]	可选，控制地图放大缩小级别，范围[3,19]
+* @apiParam {Number} [options.zoom]	可选，设置地图级别范围，默认值[3,19]
+* @apiParam {Boolean} [options.dragEnable]	可选，地图拖拽
+* @apiParam {Boolean} [options.zoomEnable]	可选，滚轮放大缩小
+* @apiParam {Boolean} [options.doubleClickZoom]	可选，双击放大
+* @apiParam {Boolean} [options.keyboardEnable]	可选，键盘操作。
+百度：启用键盘操作 键盘的上、下、左、右键可连续移动地图。同时按下其中两个键可使地图进行对角移动。PgUp、PgDn、Home和End键会使地图平移其1/2的大小。+、-键会使地图放大或缩小一级。<br>
+高德：方向键控制地图平移，"+"和"-"可以控制地图的缩放，Ctrl+“→”顺时针旋转，Ctrl+“←”逆时针旋转。<br>
+*/
+
+/**
+* @api {POST GET} /event 事件
+* @apiGroup Map
+* @apiName event
+* @apiVersion 0.1.0
+* @apiDescription 基础地图map的触发事件。
+参数MapsEvent参考MapsEvent对象规范说明部分，none表示此事件没有参数
+* @apiExample 调用示例
+var Function = function(MapsEvent){
+    console.log(MapsEvent.target);
+    console.log(MapsEvent.point);
+    ....
+}
+KingMap.addEventListener('dblclick',Function);
+* @apiParam {MapsEvent} click 鼠标左键单击事件
+* @apiParam {MapsEvent} dblclick 鼠标左键双击事件
+* @apiParam {none} movestart 地图平移开始时触发
+* @apiParam {none} moveend 地图移动结束后触发
+* @apiParam {none} dragstart 开始拖拽地图时触发
+* @apiParam {MapsEvent} mouseover 鼠标移入地图容器内时触发
+* @apiParam {MapsEvent} mouseout 鼠标移出地图容器时触发
+* @apiParam {MapsEvent} mousemove 鼠标在地图上移动时触发
+* @apiParam {none} dragging 拖拽地图过程中触发
+* @apiParam {none} dragend 停止拖拽地图时触发
+* @apiParam {MapsEvent} rightclick 右键单击地图时触发此事件
+* @apiParam {none} resize 地图容器大小改变事件
+* @apiParam {none} zoomstart 地图缩放开始时触发
+* @apiParam {none} zoomend 地图缩放停止时触发
+*/
+
+/**
+* @api {POST GET} /function 方法
+* @apiGroup Map
+* @apiName function
+* @apiVersion 0.1.0
+* @apiDescription 可使用的map对象方法
+* @apiExample 示例
+ //返回地图当前缩放级别
+ KingMap.getZoom();
+ //将视图切换到指定的缩放等级，中心点坐标不变
+ KingMap.setZoom(zoom);
+ //放大一级视图
+ KingMap.zoomIn();
+* @apiParam {none} getZoom 返回地图当前缩放级别，范围[3,19]
+* @apiParam {Number} setZoom 将视图切换到指定的缩放等级，中心点坐标不变，参数：缩放等级，范围[3,19]
+* @apiParam {none} zoomIn 放大一级视图
+* @apiParam {none} zoomOut 缩小一级视图
+* @apiParam {none} getCenter 获取地图中心点经纬度坐标值，返回KingMap.Point对象
+* @apiParam {Point} setCenter 设置地图中心点 参数：KingMap.Point对象
+* @apiParam {Point,Number} centerAndZoom 设初始化地图,参数1：KingMap.Point对象,参数2：地图级别
+* @apiParam {Array} addOverlay 将覆盖物添加到地图中，参数Array中的对象：KingMap封装的覆盖物对象
+* @apiParam {Array} removeOverlay 从地图中移除覆盖物，参数Array中的对象：KingMap封装的覆盖物对象
+* @apiParam {none} clearOverlays 清除地图上所有覆盖物
+* @apiParam {none} getOverlays 返回地图上的所有覆盖物，返回Array<Overlay>，
+* @apiParam {String} setMapStyle 设置地图样式，参数：地图样式名。如：'normal'。不同地图API有差异。
+BMap:默认地图样式(normal),清新蓝风格(light),黑夜风格(dark),详见http://lbsyun.baidu.com/custom/list.htm
+AMap:默认地图样式(normal)，还有'dark','darkblue'等不同，具体详见http://lbs.amap.com/api/javascript-api/guide/map/map-style/
+* @apiParam {String,Function} addEventListener 事件绑定
+参数1：事件名；参数2：事件功能函数，详细参见事件列表
+* @apiParam {String,Function} removeEventListener 事件解绑
+参数1：事件名；参数2：事件功能函数,详细参见事件列表
+* @apiParam {none} getMap 获取原生地图api对象
+* @apiParam {none} getApiType 获取地图类型，返回地图类型，百度地图类型："BMap"；高德地图类型："AMap"；
+* @apiParam {none} getOptions 获取初始化时的配置参数
+*/

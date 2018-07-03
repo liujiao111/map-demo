@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TestKpPolyline</title>
+    <script type="text/javascript" src="js/kpBaseMap.js" ></script>
+    <script type="application/javascript" src="js/KpPolyline.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://api.map.baidu.com/api?v=3.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script src="http://webapi.amap.com/maps?v=1.4.7&key=1e387d3db027b46a23600cf7f2ed7344"></script>
+    <style type="text/css">
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        #allmap {
+            height: 90%;
+        }
+    </style>
+</head>
+<body>
+<div><button type="button" onclick="mapType('BMap')">百度</button><button type="button" onclick="mapType('AMap')">高德</button></div>
+<div><button type="button" onclick="init()">划线</button></div>
+<div><button type="button" onclick="deleteByID()">删除折线</button></div>
+<div><button type="button" onclick="setClink()">增加点击事件</button></div>
+<div id="allmap"></div>
+<script type="application/javascript">
+    var map;
+    var kpPolyline;
+    function mapType(ty) {
+        map = new KingMap.Map({id:"allmap",apiType:ty,zoom:7});
+    };
+    function init() {
+        kpPolyline=new KingMap.Polyline(map,testPolyline);
+    }
+    function deleteByID() {
+        kpPolyline.delete();
+    }
+    function setClink() {
+        var type="click";
+        var handler=clinkTest;
+        kpPolyline.addEventListener(type,handler);
+    }
+    function clinkTest(e) {
+        console.log(e)
+        alert("你点击了ID为"+e.target.id+"的折线")
+    }
+</script>
+</body>
+<script type="application/javascript">
+    var testPolyline = {
+        strokeColor: "red",
+        strokeWeight: "5",
+        strokeOpacity: "0.5",
+        path: [
+            [111.885739, 21.71276],
+            [111.874241, 21.749289],
+            [111.802951, 21.94896],
+            [111.802951, 22.041186],
+            [111.761557, 22.079774],
+            [111.731662, 22.154775],
+            [111.821348, 22.287536],
+            [111.825948, 22.334614],
+            [111.862742, 22.413754],
+            [111.867342, 22.497123],
+            [111.867342, 22.503534],
+            [111.846645, 22.552674],
+            [111.825948, 22.567626],
+            [111.825948, 22.580441],
+            [111.759257, 22.606067],
+            [111.715564, 22.635958],
+            [111.67647, 22.749058],
+            [111.690268, 22.804506],
+            [111.786853, 22.859931],
+            [111.80985, 22.921725],
+            [111.828247, 22.960065],
+            [111.87654, 22.957935],
+            [111.917934, 22.970713],
+            [111.968527, 23.004781],
+            [112.01222, 23.002652],
+            [112.058214, 22.977101],
+            [112.122604, 22.962195],
+            [112.193894, 22.936636]
+        ]
+    };
+</script>
+</html>

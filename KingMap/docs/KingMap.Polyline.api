@@ -1,0 +1,83 @@
+/**
+ * @api {POST GET} /describe 描述
+ * @apiName describe
+ * @apiVersion 0.1.0
+ * @apiDescription 创建一个折线覆盖物实例<br>
+ * @apiGroup Polyline
+
+ * @apiExample {js} 示例
+ //构造示例
+ kpPolyline=new  KingMap.Polyline(map,options);
+
+ //方法调用
+ kpPolyline.delete();
+
+ */
+ /**
+     * @api {POST GET} /construction 构造器
+     * @apiName construction
+     * @apiVersion 0.1.0
+     * @apiGroup Polyline
+     * @apiExample 调用示例
+     kpPolyline = new KingMap.Polyline(polylineArray);
+     kpPolyline.getPolyline();
+      * @apiParam {Object} map 必须,经过封装的KingMap对象
+      * @apiParam {Object} options 初始化数据
+* @apiParam {String} [options.strokeColor]	可选，折线颜色，例："black"
+* @apiParam {Number} [options.strokeWeight]	可选，折线粗细，例：5
+* @apiParam {Number} [options.strokeOpacity]	可选，折线透明度，例：0.5
+* @apiParam {Array} options.path	必须，参数：折线点数组，例子：
+[[111.885739, 21.71276],[111.874241, 21.749289]]
+     */
+
+/**
+* @api {POST GET} /event 事件
+* @apiGroup Polyline
+* @apiName event
+* @apiVersion 0.1.0
+* @apiDescription Polyline覆盖物的触发事件。
+参数MapsEvent参考MapsEvent对象规范说明部分，none表示此事件没有参数
+* @apiExample 调用示例
+var Function = function(MapsEvent){
+    console.log(MapsEvent.target);
+    console.log(MapsEvent.point);
+    ....
+}
+kpPolyline.addEventListener('dblclick',Function);
+* @apiParam {MapsEvent} click 点击折线后会触发此事件
+* @apiParam {MapsEvent} dblclick 双击折线后会触发此事件
+* @apiParam {MapsEvent} mousedown 鼠标在折线上按下时触发事件
+* @apiParam {MapsEvent} mouseup 鼠标在折线上按下后抬起时触发事件
+* @apiParam {MapsEvent} mouseover 鼠标移近折线时触发事件
+* @apiParam {MapsEvent} mouseout    鼠标离开折线时触发此事件
+*/	
+
+	 /**
+     * @api {POST GET} /function 方法
+     * @apiName function
+     * @apiVersion 0.1.0
+     * @apiDescription 可使用的方法
+     * @apiGroup Polyline
+     * @apiExample 示例
+     kpPolyline.delete();
+     var polyline = kpPolyline.getPolyline();
+     * @apiParam {none} delete	删除折线覆盖物,
+     * @apiParam {none} getOverlay 获取原生对象，返回原生折线覆盖物对象
+     * @apiParam {Array} setPath 设置折线覆盖物的点数组，参数：pointArray，折线覆盖物的点数组，
+例：[[111.885739, 21.71276],[111.874241, 21.749289]]
+     * @apiParam {none} getPath 获取折线覆盖物的点数组，返回Path数组，
+例：[[111.885739, 21.71276],[111.874241, 21.749289]]
+     * @apiParam {String} setColor 设置折线覆盖物的颜色，参数：折线覆盖物的颜色
+例："black"
+     * @apiParam {none} getColor 获取折线覆盖物的颜色，返回颜色代码，例：'#1791fc'
+     * @apiParam {String} setOpacity 设置折线覆盖物的透明度,参数：折线覆盖物的透明度，例："0.5"
+     * @apiParam {none} getOpacity 获取折线覆盖物的透明度，返回覆盖物透明度，例："0.5"
+     * @apiParam {String} setWeight 设置折线覆盖物的宽度，参数：折线覆盖物的宽度，例："5"
+     * @apiParam {none} getWeight 获取折线覆盖物的宽度,返回覆盖物宽度，例："5"
+     * @apiParam {String,Function} addEventListener 事件绑定
+参数1：事件名；参数2：事件功能函数
+     * @apiParam {String,Function} removeEventListener 事件解绑
+参数1：事件名；参数2：事件功能函数
+	 * @apiParam {none} getOptions 获取初始化时的配置参数
+     * @apiParam {none} getApiType 获取地图覆盖物类型，高德地图类型："AMap"；百度地图类型："BMap"
+     */

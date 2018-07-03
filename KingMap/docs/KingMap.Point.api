@@ -1,0 +1,44 @@
+/**
+* @api {POST GET} /describe 描述
+* @apiGroup Point
+* @apiName describe
+* @apiVersion 0.1.0
+* @apiDescription 基础坐标构造方法，实现地图基础坐标点对象的封装
+* @apiExample {js} 示例
+* //构造示例
+* var KingPoint = new KingMap.Point(10,10);
+* //方法调用
+* KingPoint.getLng();
+*/
+
+/**
+* @api {POST GET} /construction 构造器
+* @apiGroup Point
+* @apiName construction
+* @apiVersion 0.1.0
+* @apiExample 调用示例
+* var KingPoint = new KingMap.Point(10,10);
+* @apiParam {Number} lng	必选，点坐标的经度，例：113.1111
+* @apiParam {Number} lat	必选，点坐标的纬度，例：23.11111
+* 
+*/
+
+/**
+* @api {POST GET} /function 方法
+* @apiGroup Point
+* @apiName function
+* @apiVersion 0.1.0
+* @apiDescription point的方法
+* @apiExample 示例
+* //设置标注所用的图标对象
+* KingPoint.getLng();
+* @apiParam {none} getLng 获取坐标经度，返回经度数值（Number）
+* @apiParam {none} getLat 获取坐标纬度，返回纬度数值（Number）
+* @apiParam {Point} equals 比较输入坐标和当前坐标是否一致，参数：KingMap.Point对象。返回值为Boolean
+* @apiParam {apiType} getPoint 返回原生的Point（BMap）或者LngLat（AMap）对象
+* 
+*/
+
+
+
+

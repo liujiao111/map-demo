@@ -1,0 +1,89 @@
+/**
+* @api {POST GET} /describe 描述
+* @apiName describe
+* @apiVersion 0.1.0
+* @apiDescription 创建一个文本标注实例<br>
+* @apiGroup Label
+
+* @apiExample {js} 示例
+//构造示例
+kpLabel=new KingMap.Label(map,options);
+
+//方法调用
+kpLabel.delete();
+
+//监听事件
+kpLabel.addEventListener(event,handler);
+*/
+/**
+* @api {POST GET} /construction 构造器
+* @apiName construction
+* @apiVersion 0.1.0
+* @apiGroup Label
+* @apiExample 调用示例
+    kpLabel = new KingMap.Label(map,options);
+    kpLabel.getLabel();
+* @apiParam {Object} map 必须,经过封装的KingMap对象
+* @apiParam {Object} options 初始化数据,基础配置参数
+* @apiParam {Point}  options.position 必须，指定文本标注所在的地理位置
+* @apiParam {Number} [options.zIndex]  可选，标记覆盖物的叠加顺序，参数为负数远离屏幕，为正数靠近屏幕
+* @apiParam {String} options.text   必须，文本标注的内容，例："这是一个简单的文本标注哦~"
+* @apiParam {Array}  [options.offsets]  可选，点标记显示位置偏移量，例：[10,10]
+* @apiParam {String} [option.color]    可选，颜色，例："red"
+* @apiParam {String} [option.fontSize] 可选，字体大小，例："12px"
+* @apiParam {String} [option.height]   可选，标注高度，例："20px"
+* @apiParam {String} [option.fontFamily]   可选，字体型号，例："微软雅黑"
+*/
+
+/**
+* @api {POST GET} /event 事件
+* @apiGroup Label
+* @apiName event
+* @apiVersion 0.1.0
+* @apiDescription Label覆盖物的触发事件。
+参数MapsEvent参考MapsEvent对象规范说明部分，none表示此事件没有参数
+* @apiExample 调用示例
+var Function = function(MapsEvent){
+    console.log(MapsEvent.target);
+    console.log(MapsEvent.point);
+    ....
+}
+kpLabel.addEventListener('dblclick',Function);
+* @apiParam {MapsEvent} click 点击文本标注后会触发此事件
+* @apiParam {MapsEvent} dblclick    双击文本标注后会触发此事件
+* @apiParam {MapsEvent} mousedown 鼠标在文本标注上按下时触发事件
+* @apiParam {MapsEvent} mouseup 鼠标在文本标注上按下后抬起时触发事件
+* @apiParam {MapsEvent} mouseover 鼠标移进文本标注区域时触发事件
+* @apiParam {MapsEvent} mouseout 鼠标离开文本标注时触发此事件
+* @apiParam {MapsEvent} rightclick 右键点击文本标注时触发此事件
+
+*/	
+
+/**
+* @api {POST GET} /function 方法
+* @apiName function
+* @apiVersion 0.1.0
+* @apiDescription 可使用的方法
+* @apiGroup Label
+* @apiExample 示例
+kpLabel.delete();
+var label = kpLabel.getLabel();
+
+* @apiParam {none} delete	删除文本标注
+* @apiParam {none} getOverlay 获取原生对象，返回原生文本标注对象
+* @apiParam {String} setText 设置文本标注的内容，参数：text，为文本标注的内容
+* @apiParam {none} getText 获取文本标注的内容，返回文本标注的内容
+* @apiParam {Object} setStyle 设置文本标注的style，参数格式参考css样式表，格式如下：
+style：{
+	color: "red",//字体颜色
+	font-size: "12px",//字体大小
+	height: "20px"//高度
+}
+* @apiParam {Point} setPosition 设置文本标注的位置，参数：KingMap.Point对象
+* @apiParam {String,Function} addEventListener 事件绑定
+参数1：需要绑定的事件名；参数2： 绑定的事件功能函数
+* @apiParam {String,Function} removeEventListener 事件解绑
+参数1：event，需要解绑的事件名；参数2：解绑的事件功能函数
+* @apiParam {none} getOptions 获取初始化时的配置参数
+* @apiParam {none} getApiType 获取地图覆盖物类型，高德地图类型："AMap"；百度地图类型："BMap"
+*/

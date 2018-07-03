@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>圈选demo</title>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+<script type="text/javascript"
+	src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+<link rel="stylesheet"
+	href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+
+	<script src="http://webapi.amap.com/maps?v=1.3&plugin=AMap.MouseTool"></script>	
+<script type="text/javascript" src="./js/kpBaseMap.js"></script>
+	<script type="text/javascript" src="./js/KpDrawingManager-0.1.0.js"></script>
+<style type="text/css">
+
+body, html, #allmap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
+}
+.right-query {
+    float: right;
+    position: absolute;
+    top: 10px;
+    right: 117px;
+}
+.drawing-delete{
+	color: red;
+}
+</style>
+<script type="text/javascript">
+	var fn = function(){
+		alert('我的回调' +arguments[0]||"=" +arguments[1]|| "");
+	}
+	
+
+</script>
+
+
+
+</head>
+<body>
+
+<div id="allmap"></div>
+<div class="right-query">
+	<button onclick="drawing.draw(BMAP_DRAWING_POLYGON);">多边形</button>
+	<button onclick="drawing.draw(BMAP_DRAWING_CIRCLE);">圆形</button>
+	<button onclick="drawing.draw(BMAP_DRAWING_RECTANGLE);">矩形</button>
+	<button onclick="drawing.draw(BMAP_DRAWING_POLYLINE);">折线</button>
+	<button onclick="drawing.clearAll();" class="drawing-delete">移除</button>
+	<button onclick="drawing.switch();" >切换地图</button>
+</div>
+<br/>
+<script type="text/javascript">
+
+
+
+
+var map = new KingMap.Map({id:'allmap',lng:113.330914,lat:23.128659,apiType :'BMap'});
+ drawing = {
+ 	clearAll :function(){
+ 		map.clearOverlays();
+ 	},
+ 	switch :function(){
+					if (map.getApiType() == 'BMap') {
+						map = new KingMap.Map({id:"allmap",apiType:"AMap",zoom:11});
+					}else{
+						map = new KingMap.Map({id:"allmap",apiType:"BMap",zoom:11});
+					}
+				},
+ 	draw : function (type){
+ 		
+		var callback = function  (overlay){
+
+			console.log("回调函数")
+			alert("这里是回调函数:" + (arguments[0] ||' == ') + '--'+(overlay||'==') );
+		};
+ 		var options = {
+ 			overlayComplete : callback,
+ 			
+ 		}
+ 		var drawingManager = new KingMap.DrawingManager(map);
+ 		var overlay = drawingManager.draw({type:type,
+ 			overlayComplete : callback,
+ 			enableCopyMenu : true,
+ 			enableRemoveMenu : true,
+ 			style : {fillColor : 'red'}
+ 		});
+ 		
+        
+ 	}
+ }
+
+</script>
+</body>
+</html>

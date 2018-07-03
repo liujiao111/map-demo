@@ -1,0 +1,7 @@
+code：
+	js:存放封装的js原文件
+	*.html：用于测试封装的各个功能类。
+docs:
+	api：使用apidoc生成的KingMap在线接口文档，进入api文件夹后，使用打开index.html即可看到接口文档
+	*.json：apidoc根据注解文件用于生成接口文档的全局参数配置文件；
+	*.api：apido扫描该文档，根据里面的注解生成对应的接口文档。

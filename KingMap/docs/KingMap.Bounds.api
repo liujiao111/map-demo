@@ -1,0 +1,39 @@
+/**
+ * @api {POST GET} /describe 描述
+ * @apiGroup Bounds
+ * @apiName describe
+ * @apiVersion 0.1.0
+ * @apiDescription 地物对象的经纬度矩形范围。创建一个包含所有给定点坐标的矩形区域。其中sw表示矩形区域的西南角，参数ne表示矩形区域的东北角
+ * 
+ */
+
+    /**
+     * @api {POST GET} /construction 构造器
+     * @apiGroup Bounds
+     * @apiName construction
+     * @apiVersion 0.1.0
+     * @apiExample 调用示例
+     * var KingBounds = new KingMap.Bounds(options);
+* @apiParam {Object} options	Icon初始化参数
+* @apiParam {Point} options.sw	必须，矩形区域的西北角（左上角），参数为KingMap.Point类
+* @apiParam {Point} options.ne	必须，矩形区域的东南角（右下角角），参数为KingMap.Point类
+     */
+     /**
+     * @api {POST GET} /function 方法
+     * @apiGroup Bounds
+     * @apiName function
+     * @apiVersion 0.1.0
+     * @apiDescription Bounds的方法
+     * @apiExample 示例
+     * //设置标注所用的图标对象
+     * KingBounds.getCenter();
+     * @apiParam {Point} contains 指定点坐标是否在矩形范围内（边界上的点不属于矩形范围内），参数为KingMap.Point类
+     * @apiParam {none} getCenter 获取当前Bounds的中心点经纬度坐标，返回KingMap.Point类
+     * @apiParam {none} getSouthWest 获取西南角坐标，返回KingMap.Point类
+     * @apiParam {none} getNorthEast 获取东北角坐标，返回KingMap.Point类
+     * @apiParam {String} getBounds 获取原生API的Bounds对象。参数为apiType,地图API类型：'BMap','AMap'
+     */
+
+    
+
+

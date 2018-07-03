@@ -1,0 +1,70 @@
+/**
+ * @api {POST GET} /describe 描述
+ * @apiGroup InfoWindow
+ * @apiName describe
+ * @apiVersion 0.1.0
+ * @apiDescription 基础地图构造方法，在地图上弹出一个详细信息展示窗体
+ * @apiExample {js} 示例
+ * //构造示例
+ * var KingInfoWindow = new KingMap.InfoWindow({...});
+ * //方法调用
+ * KingInfoWindow.getIsOpen();
+ */
+/**
+* @api {POST GET} /construction 构造器
+* @apiGroup InfoWindow
+* @apiName construction
+* @apiVersion 0.1.0
+* @apiExample 调用示例
+* var KingInfoWindow = new KingMap.InfoWindow({
+*     content : '',
+*     offset : [20,20],
+*     width : 500,
+*     height : 350
+* });
+* @apiParam {Object} options   地图初始化参数定义对象：
+* @apiParam {Object} options.content	必须，信息展示窗体显示的内容，可以是HTML要素字符串或者HTMLElement对象
+* @apiParam {String} options.apiType	必须，信息窗体的类型，'AMap'为高德地图，'BMap'为百度地图
+* @apiParam {Number} [options.width]	可选，信息窗宽度，单位像素。取值范围： 220 - 730。如果不设置此参数，则信息窗口的宽度将按照其内容自动调整
+* @apiParam {Number} [options.height]	可选，信息窗高度，单位像素。取值范围： 60 - 650。如果不设置此参数，则信息窗口的高度将按照其内容自动调整
+* @apiParam {Array} [options.offset]	可选，信息窗位置偏移值，例[20,20]。
+* @apiParam {Object} [options.position]	可选，信息窗体定位的位置，参数为KingMap.Point对象
+* @apiParam {Boolean} [options.autoMove]	可选，是否自动调整窗体到视野内
+* @apiParam {Boolean} [options.closeWhenClickMap]	可选，控制是否在鼠标点击地图后关闭信息窗体，默认false，鼠标点击地图后不关闭信息窗体
+*/
+
+/**
+* @api {POST GET} /event 事件
+* @apiGroup InfoWindow
+* @apiName event
+* @apiVersion 0.1.0
+* @apiDescription InfoWindow信息窗口的触发事件。
+* @apiParam {none} change 属性发生变化时
+* @apiParam {none} open 信息窗体打开之后触发事件
+* @apiParam {none} close 信息窗体关闭之后触发事件
+*/
+
+/**
+* @api {POST GET} /function 方法
+* @apiGroup InfoWindow
+* @apiName function
+* @apiVersion 0.1.0
+* @apiDescription 可使用的map对象方法
+* @apiExample 示例
+ //返回地图上的信息窗口是否已打开
+ KingInfoWindow.getIsOpen();
+* @apiParam {Object} setContent 设置窗体显示的内容，参数：信息展示窗体显示的内容，可以是HTML要素字符串或者HTMLElement对象
+* @apiParam {none} getContent 返回窗体显示的内容，HTML要素字符串或者HTMLElement对象
+* @apiParam {none} getIsOpen 返回信息窗口的打开状态，打开时为true
+* @apiParam {none} getPosition 返回信息窗体的基点坐标，返回KingMap.Point对象
+* @apiParam {Array} setSize 设置信息窗体的大小，参数：信息框宽高数组，例：[200,200]，若参数为空或者0则表示大小随内容自适应，宽度取值范围取值范围：220 - 730，高度取值范围：60 - 650
+* @apiParam {Map,Point} open 打开信息框，参数1：封装的KingMap.Map地图对象；参数2：封装的KingMap.Point对象
+* @apiParam {none} close 关闭地图上的信息框
+* @apiParam {String,Function} addEventListener 事件绑定
+参数1：事件名；参数2：事件功能函数
+* @apiParam {String,Function} removeEventListener 事件解绑
+参数1：事件名；参数2：事件功能函数
+* @apiParam {none} getInfoWindow 获取原生InfoWindow对象
+* @apiParam {none} getApiType 获取地图类型，返回地图类型，百度地图类型："BMap"；高德地图类型："AMap"；
+* @apiParam {none} getOptions 获取初始化时的配置参数
+*/
