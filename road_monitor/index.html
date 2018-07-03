@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠海移动</title>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://api.map.baidu.com/api?v=3.0&ak=pzr7GbFeIFPTurTj2g3fT4aM6t54IYyn"></script>
+    <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/road_data.js" ></script>
+    <script type="text/javascript" src="js/mapv.js"></script>
+    <script src="js/demo.js"></script>
+    <script src="js/kpBaseMap.js"></script>
+    <script src="js/KpPolyline.js"></script>
+    <script src="js/KpLabel.js"></script>
+    <script src="js/lukou_data_gangwan.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<input class="external-input" value="重点道路监控"/>
+<input class="external-times" id="datetimepicker" placeholder="选择时间段" onchange="demo.changeHour()" hidden/>
+<div class="external-ul-left">
+        <li class="external-li-left" onselectstart="return false" onclick="demo.service(this)">港湾大道</li>
+        <li class="external-li-left" onselectstart="return false" >九洲大道</li>
+        <li class="external-li-left" onselectstart="return false" >古元大道</li>
+        <li class="external-li-left" onselectstart="return false" >升平大道</li>
+        <li class="external-li-left" onselectstart="return false" >洪湾大道</li>
+    </ul>
+</div>
+<div class="time" id="time"></div>
+<div class="external-ul-right" id="div2" hidden>
+        <li class="external-li-right">
+            <span class="describe">日均流量</span>
+            <span id="visitorData" class="value">1000111</span>
+            <span class="Company">人</span>
+        </li>
+        <li class="external-li-right">
+            <span class="describe">最堵路口</span>
+            <span id="crossing" class="Name"></span>
+        </li>
+        <li class="external-li-right">
+            <span class="morning">早高峰</span>
+            <span id="morning" class="times"></span>
+            <span class="morning">晚高峰</span>
+            <span id="afternoon" class="times"></span>
+        </li>
+</div>
+<div id="div4" class="div4" hidden>
+    <div id="div5" class="div5">
+        <button class="btn btn-primary" name="workDay" onclick="demo.restorwork(this)">工作日</button>
+        <button class="btn btn-default" name="restDay" onclick="demo.restorwork(this)">周末</button>
+    </div>
+    <div id="div6" class="div6"></div>
+</div>
+<div class="details" id="details" hidden>
+    <div class="details-Location" id="details-Location">
+        <span class="Identification">路口名称：</span>
+        <span id="name" class="data"></span>
+        <span class="Identification">人流量：</span>
+        <span id="count" class="data"></span>
+        <span class="Identification">路口类型：</span>
+        <span id="type" class="data"></span>
+        <span class="Close-ico" onclick="$('#details').hide()">×</span>
+    </div>
+    <div class="details-Location" id="road_Location" hidden>
+        <span class="Identification">途　　径：</span>
+        <span id="road_name" style="color: #15fcff;float: left;width: 200px;padding-bottom: 6px;text-align: right;"></span>
+        <span class="Identification">时&nbsp&nbsp间&nbsp&nbsp段：</span>
+        <span id="road_time" class="data"></span>
+        <span class="Identification">流　　量：</span>
+        <span id="road_count" class="data"></span>
+        <span class="Close-ico" onclick="$('#details').hide()">×</span>
+    </div>
+</div>
+<div id="allMap">
+</div>
+</body>
+<script>
+    $('#datetimepicker').datetimepicker({
+        format: 'hh:00-hh:59',
+        language:"zh-CN",
+        startView:"day",
+        minView:"day",
+        showMeridian:false,
+        todayBtn:false,
+        autoclose:true,
+        todayHighlight:false
+    });
+</script>
+<script type="application/javascript">
+    demo.init();
+    countSum.init();  //人流量统计初始化
+</script>
+</html>

@@ -1,0 +1,222 @@
+body, html,#allMap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+.div1 {
+    border-width: 0px;
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    width: 260px;
+    height: 500px;
+    background: inherit;
+    background-color: rgba(0, 102, 204, 0.549019607843137);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(121, 121, 121, 1);
+    border-radius: 0px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #FFFFFF;
+    z-index: 10;
+}
+.text{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+.div2{
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    width: 200px;
+    height: 500px;
+    z-index: 10;
+}
+.div3{
+    position:relative;
+    margin-top: 10px;
+    border-width: 0px;
+    width: 164px;
+    height: 119px;
+    background: inherit;
+    background-color: rgba(0, 102, 204, 0.549019607843137);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 1);
+    border-radius: 0px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    z-index: 10;
+}
+.div4{
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    width: 500px;
+    height:auto;
+    z-index: 10;
+}
+.div5{
+    margin-left: 25px;
+    z-index: 10;
+}
+.div6{
+    position: relative;
+    width: 500px;
+    height: 500px;
+    z-index: 10;
+}
+.external-ul-left{
+    position: absolute;
+    top: 106px;
+    left: 1px;
+    width: 232px;
+    height: 520px;
+    border: 1px solid #070002;
+    box-shadow: 0px 0px 2px #00baff;
+    background: rgba(41, 134, 154, 0.4);
+    padding:15px;
+    list-style: none;
+    z-index: 10;
+}
+.external-li-left{
+    height: 48px;
+    line-height: 48px;
+    padding-left: 70px;
+    border-top: 2px solid rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    color: #a1ddf6;
+    background: url(../images/Map-ico001.png) no-repeat 30px;
+    cursor: pointer;
+}
+.external-li-left:nth-last-child(1){
+    border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+}
+.li-active{
+    font-size: 16px;
+    color: #ff9600;
+    background: url(../images/Map-ico001add.png) no-repeat 30px rgba(2, 16, 25, 0.5);
+}
+.external-ul-right{
+    position: absolute;
+    top: 106px;
+    right: 1px;
+    list-style: none;
+    z-index: 10;
+}
+.external-li-right{
+    width: 220px;
+    height: 115px;
+    background: #194c75;
+    color: #fbe104;
+    margin-bottom: 10px;
+    padding: 26px;
+    box-sizing: border-box;
+}
+.time{
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    color: #fff;
+    font-size: 18px;
+    z-index: 10;
+}
+.value{
+    font-size: 24px;
+    display: inline-block;
+}
+.Company{
+    font-size: 14px;
+}
+.describe{
+    display: block;
+    font-size: 16px;
+    color: #a1ddf6;
+    padding-top: 10px;
+}
+.Name{
+    font-size: 20px;
+}
+.morning{
+    font-size: 16px;
+    color: #a1ddf6;
+    width: 50%;
+    float: left;
+    margin-top: 5px;
+}
+.times{
+    float: left;
+    width: 50%;
+    text-align: center;
+    font-size: 24px;
+}
+.external-times{
+    width: 150px;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid #070002;
+    background: rgba(12, 22, 26, 0.8);
+    border-radius: 4px;
+    box-shadow: 0px 0px 2px #00baff;
+    position: absolute;
+    left: 280px;
+    top: 108px;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    color: #999;
+    z-index: 10;
+}
+.external-input{
+    position: absolute;
+    left: 1px;
+    top: 20px;
+    width: 188px;
+    height: 46px;
+    border: 1px solid #070002;
+    box-shadow: 0px 0px 2px #00baff;
+    background: rgba(2, 16, 25, 0.8);
+    color: #00baff;
+    font-size: 18px;
+    text-align: center;
+    z-index: 10;
+}
+.details{
+    position: absolute;
+    bottom: 30px;
+    right: 490px;
+    width: 224px;
+    height: 144px;
+    background: #000;
+    box-shadow: 0px 0px 2px #00baff;
+    border: 1px solid #040000;
+    border-radius:10px;
+    z-index: 10;
+}
+.details-Location{
+    position: relative;
+    font-size: 14px;
+    padding: 23px 10px;
+}
+.Identification{
+    color: #fff;
+    width: 80px;
+    float: left;
+    text-align: right;
+    padding-bottom: 6px;
+}
+.data{
+    color: #15fcff;
+    float: left;
+    width: 100px;
+    padding-bottom: 6px;
+}
+.Close-ico{
+    position: absolute;
+    top: 0px;
+    right: 8px;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 20px;
+}
