@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<!-- 高德地图--3D地图、银色线条的道路网、3D立体效果的热力图展示 -->
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>基本热力图 - 3D </title>
+		<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+	</head>
+
+	<body>
+		<div id="container" class="container"></div>
+		<script type="text/javascript" src="road_data_gaode.js" ></script>
+		<script type="text/javascript" src="flow_chart_data.js"></script>
+		<script src="http://webapi.amap.com/loca?key=e3c62575d8654fcb6e28279b46fdb9b0"></script>
+		<script src="http://a.amap.com/Loca/static/mock/heatmapData.js"></script>
+		<script>
+			var map = Loca.create('container', {
+					features: ['bg', 'road'],
+					center: [113.51825004901814, 22.264998292237017],
+					viewMode: '3D',
+					pitch: 50,
+					zoom: 14,
+					mapStyle: 'amap://styles/grey', //地图样式 //grey  //darkblue
+				});
+			/**
+			 * 初始化3D热力图
+			 */
+			function initLocaHeatMap() {
+				map.on('mapload', function() {
+					map.getMap().plugin(['AMap.ControlBar'], function() {
+						var controlBar = new AMap.ControlBar();
+						map.getMap().addControl(controlBar);
+					});
+				});
+
+				var layer = Loca.visualLayer({
+					container: map,
+					type: 'heatmap',
+					shape: 'normal'
+				});
+
+				console.log(flow_chart_data)
+				heatmapData = flow_chart_data[0]
+
+				var list = [];
+				var i = -1,
+					length = heatmapData.length;
+				while(++i < length) {
+					var item = heatmapData[i];
+					list.push({
+						coordinate: [item.lng, item.lat],
+						count: item.count
+					})
+				}
+
+				layer.setData(list, {
+					lnglat: 'coordinate',
+					value: 'count',
+					max: 100,
+					min: 0
+				});
+
+				layer.setOptions({
+					style: {
+						radius: 25,
+						opacity: [0, 0.7],
+					},
+					gradient: {
+						0.5: 'blue',
+						0.65: 'rgb(117,211,248)',
+						0.7: 'rgb(0, 255, 0)',
+						0.9: '#ffea00',
+						1.0: 'red'
+					}
+				});
+				layer.render();
+			}
+
+			/**
+			 * 初始化道路网数据
+			 */
+			function initRoad() {
+				var layer = Loca.visualLayer({
+			        container: map,
+			        type: 'line',
+			        shape: 'line',
+			    });
+			    
+			    //lines = [{"linePath":[["113.52312898184174","22.27357281941615"],["113.5231815784764","22.273561228444535"],["113.52336184754083","22.2733413244094"],["113.52401052709213","22.272515742618356"],["113.52455955924461","22.271600747303673"],["113.52467845581032","22.27133642234186"]]}];
+				lines = road_data_gaode;
+				
+		        layer.setData(lines, {
+		            lnglat: 'linePath'
+		        });
+		        layer.setOptions({
+		            style: {
+		                 opacity: 0.7,
+			             lineWidth: 10,
+			             stroke: '#b7eff7',
+		            }
+		        });
+		
+		        layer.render();
+			}
+			
+			initLocaHeatMap();
+			
+			initRoad();
+		</script>
+	</body>
+
+</html>
