@@ -1,0 +1,89 @@
+"""
+根据矩形坐标范围爬取POI数据(没有边界数据)
+
+"""
+from urllib.parse import quote
+from urllib import request
+import json
+import xlwt
+
+# TODO
+amap_web_key = '9f99fc570ccaf6abc209780433d9f4c1'  # 高德地图官网申请的Web API KEY
+filename = r'C:\study\hehe.xls'     # 爬取到的数据写入的EXCEL路径
+
+# 矩形边界集合
+polygon_list = ['116.80708,31.449926,117.510206,32.247823','116.80708,31.449926,117.158643,31.8488745','116.80708,31.449926,116.9828615,31.64940025','116.9828615,31.449926,117.158643,31.64940025','116.80708,31.64940025,116.9828615,31.8488745','116.9828615,31.64940025,117.158643,31.8488745','117.158643,31.449926,117.510206,31.8488745','117.158643,31.449926,117.3344245,31.64940025','117.3344245,31.449926,117.510206,31.64940025','117.158643,31.64940025,117.3344245,31.8488745','117.158643,31.64940025,117.24653375,31.749137375','117.24653375,31.64940025,117.3344245,31.749137375','117.158643,31.749137375,117.24653375,31.8488745','117.24653375,31.749137375,117.3344245,31.8488745','117.3344245,31.64940025,117.510206,31.8488745','116.80708,31.8488745,117.158643,32.247823','117.158643,31.8488745,117.510206,32.247823','117.158643,31.8488745,117.3344245,32.04834875','117.3344245,31.8488745,117.510206,32.04834875','117.3344245,31.8488745,117.42231525,31.948611625','117.42231525,31.8488745,117.510206,31.948611625','117.3344245,31.948611625,117.42231525,32.04834875','117.42231525,31.948611625,117.510206,32.04834875','117.158643,32.04834875,117.3344245,32.247823','117.3344245,32.04834875,117.510206,32.247823']
+
+# POI分类集合
+#class_list = ['商城', '超级市场']
+type_list = '060401|060402|060403|060404|060405|060406|060407|060408|060409|060411|060413|060414|060415|060100|060101|060102|060103'
+
+poi_search_url = "http://restapi.amap.com/v3/place/polygon"  # URL
+
+offset=25  # 分页请求数据时的单页大小
+
+# 根据矩形坐标获取poi数据
+def getpois(polygon, type_list):
+    i = 1
+    current_polygon_poi_list = []
+    while True:  # 使用while循环不断分页获取数据
+        result = getpoi_page(polygon, i, type_list)
+        result = json.loads(result)  # 将字符串转换为json
+
+        #print('第', str(i),'页，结果',result)
+
+        if result['status'] is not '1':  # 接口返回的状态不是1代表异常
+            print('======爬取错误，返回数据：' + result)
+            break
+        pois = result['pois']
+        if len(pois) < offset:  # 返回的数据不足分页页大小，代表数据爬取完
+            current_polygon_poi_list.extend(pois)
+            break
+        current_polygon_poi_list.extend(pois)
+        i += 1
+    print('===========当前polygon：', polygon,',爬取到的数据数量：' ,str(len(current_polygon_poi_list)))
+
+    return current_polygon_poi_list
+
+
+
+
+# 单页获取pois
+'''
+http://restapi.amap.com/v3/place/polygon?polygon=116.80708,31.449926,117.510206,32.247823&key=c5304f29d1a11f14c4fb29854a831ef0&extensions=all&offset=5&page=1
+'''
+def getpoi_page(polygon, page, type_list):
+    req_url = poi_search_url + "?key=" + amap_web_key + '&extensions=all&polygon=' + polygon + '&offset=' + str(offset) + '&types=' + type_list + '&page=' + str(page) + '&output=json'
+    data = ''
+    with request.urlopen(req_url) as f:
+        data = f.read()
+        data = data.decode('utf-8')
+    return data
+
+# 数据写入excel
+def write_to_excel(poilist, filename):
+    # 一个Workbook对象，这就相当于创建了一个Excel文件
+    book = xlwt.Workbook(encoding='utf-8', style_compression=0)
+    sheet = book.add_sheet('0', cell_overwrite_ok=True)
+    # 第一行(列标题)
+    sheet.write(0, 0, 'id')
+    sheet.write(0, 1, 'name')
+    sheet.write(0, 2, 'location')
+    sheet.write(0, 3, 'type')
+    for i in range(len(poilist)):
+        sheet.write(i + 1, 0, poilist[i]['id'])
+        sheet.write(i + 1, 1, poilist[i]['name'])
+        sheet.write(i + 1, 2, poilist[i]['location'])
+        sheet.write(i + 1, 3, poilist[i]['type'])
+    book.save(filename)
+
+
+all_poi_list = [] #爬取到的所有数据
+
+for polgon in polygon_list:
+    polygon_poi_list = getpois(polgon, type_list)
+    all_poi_list.extend(polygon_poi_list)
+
+print('爬取完成,总的数量', len(all_poi_list))
+write_to_excel(all_poi_list, filename)
+print('写入成功')
